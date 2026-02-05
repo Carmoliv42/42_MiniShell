@@ -19,8 +19,13 @@
 #include "libft/libft.h"
 
 /**************EXEC***************/
-void exec_line(char *line, char **envp);
+void	exec_line(char *line, char **envp);
 
+/***************Utils*************/
+void	free_args(char **args);
 
+/****************Path*************/
+char	*get_path(char **envp);
+char	*find_cmd_path(char *cmd, char **envp);
 
 #endif

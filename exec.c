@@ -10,30 +10,28 @@ void exec_line(char *line, char **envp)
     char    **args;
     pid_t   pid;
     int     status;
+    char    *cmd_path;
 
     args = temp_parse(line);
     if (args[0] == NULL)
     {
-        free(args);
+        free_args(args);
         return ;
     }
     pid = fork();
     if (pid == 0)
     {
-        if (execve(args[0], args, envp) == -1)
+        cmd_path = find_cmd_path(args[0], envp);
+        if (!cmd_path)
         {
-            perror("minishell: execve error");
-            exit(EXIT_FAILURE);
+            ft_putstr_fd("minishell: command not found\n", 2);
+            exit(127);
         }
+        execve(cmd_path,args,envp);
+        perror("minishell: execve");
+        exit(EXIT_FAILURE);
     }
-    else if (pid < 0)
-    {
-        perror("minishell: fork error");
-    }
-    else
-    {
-        waitpid(pid, &status, 0);
-    }
-    free(args);
+    waitpid(pid, &status, 0);
+    free_args(args);
 }
 

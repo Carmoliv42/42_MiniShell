@@ -8,14 +8,14 @@ INCLUDES = -I includes -I libft/includes
 LIBFT_DIR = libft
 LIBFT = $(LIBFT_DIR)/libft.a
 
-SRC = main.c exec.c
+SRC = main.c exec.c utils.c path.c
 
 
 OBJS = $(SRC:.c=.o)
 
 all:	$(NAME)
 $(NAME):	$(LIBFT) $(OBJS)
-	$(CC) $(CFLAGS) $(INCLUDES) -lreadline -o $(NAME) $(OBJS) $(LIBFT)
+	$(CC) $(CFLAGS) $(INCLUDES) $(OBJS) $(LIBFT) -lreadline -o $(NAME)
 
 $(LIBFT):
 	make -C $(LIBFT_DIR)
