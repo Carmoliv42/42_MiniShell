@@ -14,9 +14,7 @@ static char	*alloc_remove_quotes(const char *str, int *len)
 char	*remove_quotes(const char *str)
 {
 	char	*result;
-	int		len;
-	int		i;
-	int		j;
+	int		len, i, j;
 	char	quote_char;
 
 	result = alloc_remove_quotes(str, &len);
@@ -28,19 +26,11 @@ char	*remove_quotes(const char *str)
 	while (i < len)
 	{
 		if (!quote_char && (str[i] == '\'' || str[i] == '"'))
-		{
-			quote_char = str[i];
-			i++;
-			continue ;
-		}
-		if (quote_char && str[i] == quote_char)
-		{
-			quote_char = 0;
-			i++;
-			continue ;
-		}
-		result[j++] = str[i++];
+			quote_char = str[i++];
+		else if (quote_char && str[i] == quote_char)
+			quote_char = 0, i++;
+		else
+			result[j++] = str[i++];
 	}
-	result[j] = '\0';
-	return (result);
+	return (result[j] = '\0', result);
 }
