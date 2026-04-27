@@ -15,7 +15,10 @@ static char	*read_shell_input(void)
 	input = NULL;
 	len = 0;
 	if (getline(&input, &len, stdin) == -1)
+	{
+		free(input);
 		return (NULL);
+	}
 	return (input);
 }
 
