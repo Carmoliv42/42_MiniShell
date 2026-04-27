@@ -1,31 +1,25 @@
 #ifndef MINISHELL_H
-#define MINISHELL_H
+# define MINISHELL_H
 
+# include <stdio.h>
+# include <stdlib.h>
+# include <unistd.h>
+# include <string.h>
+# include <signal.h>
+# include <sys/types.h>
+# include <sys/wait.h>
+# include <fcntl.h>
+# include <errno.h>
+# include <readline/readline.h>
+# include <readline/history.h>
+# include "src/libft/libft.h"
 
-
-#include <stdio.h>
-#include <stdlib.h>
-#include <unistd.h>
-#include <string.h>
-#include <fcntl.h>
-#include <sys/types.h>
-#include <sys/wait.h>
-#include <signal.h>
-#include <errno.h>
-#include <readline/readline.h>
-#include <readline/history.h>
-#include <limits.h>
-#include <ctype.h>
-#include "libft/libft.h"
-
-/**************EXEC***************/
-void	exec_line(char *line, char **envp);
-
-/***************Utils*************/
-void	free_args(char **args);
-
-/****************Path*************/
-char	*get_path(char **envp);
-char	*find_cmd_path(char *cmd, char **envp);
+# include "include/ms_types.h"
+# include "include/ms_parsing.h"
+# include "include/ms_execution.h"
+# include "include/ms_builtins.h"
+# include "include/ms_env.h"
+# include "include/ms_utils.h"
+# include "include/ms_signals.h"
 
 #endif
